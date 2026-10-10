@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="NOIR SUPPLY — USA drip, streetwear e moda urbana para o seu estilo.">
+  <title>NOIR SUPPLY — Built for the Streets</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --panel: #111111;
+      --panel-2: #171717;
+      --text: #f5f5f5;
+      --muted: #a4a4a4;
+      --line: #292929;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Arial, Helvetica, sans-serif; line-height: 1.5;
+    }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    .announcement {
+      padding: 9px 16px; text-align: center; background: #f4f4f4;
+      color: #080808; font-size: 10px; letter-spacing: 2px; font-weight: 800;
+    }
+    header {
+      position: sticky; top: 0; z-index: 20; background: rgba(8,8,8,.94);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: 1240px; margin: auto; min-height: 76px; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand { font-weight: 900; letter-spacing: 5px; font-size: 21px; white-space: nowrap; }
+    .brand small { display: block; font-size: 8px; letter-spacing: 5px; text-align: center; color: #aaa; margin-top: 1px; }
+    .nav-links { display: flex; align-items: center; gap: 27px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+    .nav-links a:hover, .text-link:hover { color: #aaa; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .icon-btn {
+      color: white; background: transparent; border: 1px solid var(--line);
+      min-height: 40px; padding: 0 13px; cursor: pointer; font-size: 11px; letter-spacing: 1px;
+    }
+    .icon-btn:hover { border-color: #777; }
+    .hero {
+      min-height: 570px; display: grid; grid-template-columns: 1.05fr .95fr;
+      border-bottom: 1px solid var(--line); overflow: hidden;
+    }
+    .hero-copy {
+      padding: 80px max(30px, calc((100vw - 1240px)/2)); padding-right: 35px;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    }
+    .eyebrow { font-size: 10px; letter-spacing: 3px; color: #b5b5b5; text-transform: uppercase; }
+    h1 { font-size: clamp(44px, 6vw, 82px); line-height: .95; letter-spacing: -4px; margin: 22px 0; max-width: 650px; }
+    h1 span { color: #858585; }
+    .hero-copy p { color: #b4b4b4; max-width: 390px; font-size: 14px; line-height: 1.8; }
+    .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 12px;
+      background: #f4f4f4; color: #080808; padding: 15px 22px; border: 1px solid #f4f4f4;
+      cursor: pointer; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 10px;
+      transition: .2s;
+    }
+    .button:hover { background: transparent; color: #fff; }
+    .button.secondary { background: transparent; color: #fff; border-color: #4a4a4a; }
+    .button.secondary:hover { background: #fff; color: #080808; }
+    .hero-visual {
+      min-height: 420px; position: relative; display: grid; place-items: center; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 40%, #303030 0, #171717 35%, #090909 73%);
+    }
+    .hero-visual::before {
+      content: "NOIR"; position: absolute; font-weight: 900; font-size: clamp(90px, 16vw, 220px);
+      letter-spacing: -12px; color: rgba(255,255,255,.045); transform: rotate(-90deg);
+    }
+    .hero-art {
+      position: relative; width: min(75%, 390px); height: 380px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid #353535; background: linear-gradient(145deg, #222, #090909 68%);
+      box-shadow: 25px 30px 80px #000; transform: rotate(3deg);
+    }
+    .hero-art::before {
+      content: ""; position: absolute; inset: 15px; border: 1px solid #3c3c3c;
+    }
+    .hero-art-label { text-align: center; z-index: 1; }
+    .hero-art-label strong { display: block; font-size: clamp(30px, 5vw, 52px); letter-spacing: 7px; }
+    .hero-art-label span { display: block; color: #aaa; font-size: 9px; letter-spacing: 5px; margin-top: 12px; }
+    .hero-stamp { position: absolute; bottom: 28px; right: 28px; font-size: 9px; letter-spacing: 2px; color: #aaa; }
+    .section { max-width: 1240px; margin: auto; padding: 76px 24px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(26px, 4vw, 38px); margin: 8px 0 0; letter-spacing: -1.5px; }
+    .section-head p { color: var(--muted); font-size: 12px; margin: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+    .filter {
+      border: 1px solid var(--line); color: #aaa; background: transparent; padding: 10px 14px;
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    }
+    .filter.active, .filter:hover { background: #f5f5f5; color: #080808; border-color: #f5f5f5; }
+    .filter-label { width:100%; color:#777; font-size:9px; letter-spacing:2px; margin:5px 0 2px; text-transform:uppercase; }
+    .brand-filters { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+    .brand-filter { border:1px solid #383838; color:#aaa; background:#101010; padding:10px 14px; font-size:10px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
+    .brand-filter.active, .brand-filter:hover { background:#f5f5f5; color:#080808; border-color:#f5f5f5; }
+    .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .product-card { min-width: 0; background: var(--panel); border: 1px solid #202020; }
+    .product-image {
+      position: relative; aspect-ratio: 4/4.7; display: grid; place-items: center; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 35%, #343434, #171717 55%, #0c0c0c);
+    }
+    .product-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-image { cursor: zoom-in; }
+    .product-image:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+    .details-btn { border: 1px solid #444; color: #ddd; background: transparent; padding: 10px 12px; font-size: 9px; font-weight: 800; letter-spacing: 1px; cursor: pointer; }
+    .details-btn:hover { border-color: #fff; color: #fff; }
+    .details-modal-backdrop { display:none; position:fixed; z-index:55; inset:0; background:rgba(0,0,0,.86); padding:20px; place-items:center; overflow-y:auto; }
+    .details-modal-backdrop.open { display:grid; }
+    .details-modal { position:relative; width:min(850px,100%); max-height:calc(100vh - 40px); overflow:auto; display:grid; grid-template-columns:1fr 1fr; background:#101010; border:1px solid #353535; }
+    .details-photo { min-height:360px; background:#080808; display:grid; place-items:center; }
+    .details-photo img { display:block; width:100%; height:100%; max-height:620px; object-fit:contain; }
+    .details-copy { padding:34px; align-self:center; }
+    .details-copy h2 { margin:10px 0; font-size:clamp(22px,3vw,32px); line-height:1.1; }
+    .details-price { font-size:18px; font-weight:800; margin:18px 0; }
+    .details-copy p, .details-copy li { color:#aaa; font-size:12px; line-height:1.8; }
+    .details-copy ul { padding-left:18px; margin:14px 0 22px; }
+    .details-close { position:absolute; z-index:2; top:12px; right:12px; background:#080808; color:#fff; border:1px solid #555; padding:9px 12px; cursor:pointer; }
+    .details-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .details-actions button { flex:1; min-width:130px; }
+    .view-hint { position:absolute; bottom:12px; right:12px; background:rgba(0,0,0,.75); color:#fff; padding:7px 9px; font-size:9px; letter-spacing:1px; }
+    .image-placeholder { text-align: center; padding: 20px; }
+    .image-placeholder .shape { font-size: 70px; filter: grayscale(1); opacity: .8; }
+    .image-placeholder b { display: block; letter-spacing: 3px; font-size: 13px; margin-top: 10px; }
+    .image-placeholder small { color: #aaa; font-size: 9px; letter-spacing: 2px; }
+    .tag { position: absolute; top: 13px; left: 13px; background: #f4f4f4; color: #080808; padding: 6px 8px; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+    .product-info { padding: 18px; }
+    .product-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .product-name { font-size: 13px; font-weight: 700; margin: 0; }
+    .product-type { font-size: 10px; color: #999; margin-top: 5px; }
+    .price { font-size: 13px; font-weight: 800; white-space: nowrap; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 17px; }
+    .sizes { font-size: 9px; letter-spacing: 1px; color: #aaa; }
+    .add-btn { border: 1px solid #555; color: white; background: transparent; padding: 10px 12px; font-size: 9px; font-weight: 800; letter-spacing: 1px; cursor: pointer; }
+    .add-btn:hover { background: white; color: black; border-color: white; }
+    .story {
+      display: grid; grid-template-columns: .9fr 1.1fr; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      background: #0e0e0e;
+    }
+    .story-art { min-height: 320px; display: grid; place-items: center; background: repeating-linear-gradient(135deg,#121212,#121212 2px,#0b0b0b 2px,#0b0b0b 7px); }
+    .story-mark { border: 1px solid #454545; padding: 42px 30px; text-align: center; }
+    .story-mark b { font-size: 36px; letter-spacing: 6px; }
+    .story-mark span { display: block; font-size: 9px; letter-spacing: 4px; color: #aaa; margin-top: 12px; }
+    .story-copy { padding: 55px clamp(25px, 7vw, 95px); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+    .story-copy h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.05; margin: 14px 0; letter-spacing: -1.5px; }
+    .story-copy p { color: #aaa; font-size: 13px; line-height: 1.9; max-width: 500px; }
+    .perks { max-width: 1240px; padding: 30px 24px; margin: auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .perk { border: 1px solid var(--line); padding: 22px; }
+    .perk b { display: block; font-size: 10px; letter-spacing: 1.5px; margin: 10px 0 5px; }
+    .perk p { margin: 0; font-size: 11px; color: #999; }
+    footer { border-top: 1px solid var(--line); padding: 42px 24px 24px; }
+    .footer-inner { max-width: 1240px; margin: auto; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 35px; }
+    .footer-inner p, .footer-inner a { color: #999; font-size: 11px; line-height: 1.9; }
+    .footer-inner h3 { font-size: 10px; letter-spacing: 2px; }
+    .footer-links { display: flex; flex-direction: column; align-items: flex-start; }
+    .copyright { max-width: 1240px; margin: 35px auto 0; padding-top: 18px; border-top: 1px solid var(--line); color: #666; font-size: 9px; letter-spacing: 1px; display: flex; justify-content: space-between; gap: 15px; }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 40; display: none; }
+    .overlay.open { display: block; }
+    .cart {
+      position: fixed; z-index: 41; right: 0; top: 0; height: 100%; width: min(430px, 100%);
+      background: #0c0c0c; border-left: 1px solid #333; padding: 24px; transform: translateX(105%);
+      transition: transform .25s; display: flex; flex-direction: column;
+    }
+    .cart.open { transform: translateX(0); }
+    .cart-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+    .cart-head h2 { margin: 0; font-size: 16px; letter-spacing: 2px; }
+    .close-btn { background: transparent; color: white; border: 1px solid #444; padding: 8px 12px; cursor: pointer; }
+    .cart-items { flex: 1; overflow: auto; padding: 12px 0; }
+    .cart-item { display: grid; grid-template-columns: 1fr auto; gap: 10px; border-bottom: 1px solid #242424; padding: 14px 0; font-size: 12px; }
+    .cart-item small { display: block; color: #999; margin-top: 4px; }
+    .cart-item button { color: #aaa; background: none; border: 0; cursor: pointer; font-size: 10px; padding: 8px 0; }
+    .cart-total { border-top: 1px solid #333; padding-top: 18px; }
+    .total-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 800; }
+    .cart-total .button { width: 100%; }
+    .cart-note { color: #888; font-size: 10px; line-height: 1.6; }
+    .modal-backdrop { display: none; position: fixed; z-index: 50; inset: 0; background: rgba(0,0,0,.8); padding: 20px; place-items: center; }
+    .modal-backdrop.open { display: grid; }
+    .modal { width: min(450px,100%); background: #101010; border: 1px solid #333; padding: 26px; }
+    .modal h2 { font-size: 20px; margin: 0 0 8px; }
+    .modal p { color: #999; font-size: 12px; }
+    .field { display: block; margin: 16px 0; }
+    .field span { display: block; font-size: 10px; color: #aaa; letter-spacing: 1px; margin-bottom: 7px; }
+    .field select, .field input { width: 100%; background: #080808; border: 1px solid #444; color: white; padding: 12px; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .modal-actions > * { flex: 1; }
+    .toast { position: fixed; z-index: 60; bottom: 22px; left: 50%; transform: translate(-50%,20px); background: #f4f4f4; color: #080808; padding: 13px 18px; font-size: 11px; font-weight: 700; opacity: 0; pointer-events: none; transition: .2s; }
+    .toast.show { opacity: 1; transform: translate(-50%,0); }
+    @media (max-width: 760px) {
+      .nav { min-height: 66px; padding: 0 16px; }
+      .brand { font-size: 17px; letter-spacing: 3px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-copy { padding: 65px 24px 48px; }
+      .hero-visual { min-height: 330px; }
+      .hero-art { height: 270px; }
+      .section { padding: 55px 16px; }
+      .products { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+      .product-info { padding: 12px; }
+      .product-top { flex-direction: column; gap: 7px; }
+      .product-name { font-size: 11px; }
+      .price { font-size: 12px; }
+      .product-bottom { align-items: flex-start; flex-direction: column; }
+      .add-btn { width: 100%; }
+      .story { grid-template-columns: 1fr; }
+      .story-art { min-height: 240px; }
+      .story-copy { padding: 40px 24px; }
+      .perks { grid-template-columns: 1fr; padding: 20px 16px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-inner > div:first-child { grid-column: 1/-1; }
+      .copyright { flex-direction: column; }
+      h1 { letter-spacing: -2px; }
+    }
+    @media (max-width: 620px) {
+      .details-modal { grid-template-columns:1fr; max-height:calc(100vh - 24px); }
+      .details-photo { min-height:240px; max-height:42vh; }
+      .details-photo img { max-height:42vh; }
+      .details-copy { padding:22px; }
+    }
+    @media (max-width: 380px) {
+      .products { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">NOIR SUPPLY — BUILT FOR THE STREETS</div>
+  <header>
+    <nav class="nav" aria-label="Navegação principal">
+      <a class="brand" href="#inicio">NOIR <span style="color:#777">SUPPLY</span><small>USA DRIP</small></a>
+      <div class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">A marca</a>
+        <a href="#contato">Contato</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="cart-open" aria-label="Abrir carrinho">SACOLA (<span id="cart-count">0</span>)</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <div class="eyebrow">USA DRIP · DROP 001</div>
+        <h1>SEU ESTILO.<br><span>SUAS REGRAS.</span></h1>
+        <p>Moda USA drip, streetwear e peças urbanas para montar seu próprio estilo.</p>
+        <a class="button" href="#produtos">Explorar coleção <span>↗</span></a>
+      </div>
+      <div class="hero-visual" aria-label="Arte gráfica da NOIR SUPPLY">
+        <div class="hero-art"><div class="hero-art-label"><strong>NOIR</strong><span>BUILT FOR THE STREETS</span></div></div>
+        <div class="hero-stamp">DROP 001 / ESSENTIALS</div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="section-head">
+        <div><div class="eyebrow">Escolha sua peça</div><h2>ÚLTIMO DROP</h2></div>
+        <p>Peças essenciais para o seu dia a dia.</p>
+      </div>
+      <div class="filter-label">Marcas</div>
+      <div class="brand-filters" aria-label="Filtrar por marca">
+        <button class="brand-filter active" data-brand="nocta">NOCTA</button>
+        <button class="brand-filter" data-brand="nike">Nike</button>
+        <button class="brand-filter" data-brand="chrome-hearts">Chrome Hearts</button>
+        <button class="brand-filter" data-brand="amiri">Amiri</button>
+        <button class="brand-filter" data-brand="noir">NOIR SUPPLY</button>
+      </div>
+      <div class="filter-label">Categorias</div>
+      <div class="filters" aria-label="Filtros de produtos">
+        <button class="filter" data-filter="jaquetas">Jaquetas</button>
+        <button class="filter" data-filter="calcas">Calças</button>
+      </div>
+      <div class="products" id="products">
+        <article class="product-card" data-category="jaquetas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da jaqueta" data-details="jacket">
+            <span class="tag">ESTILO NOCTA</span>
+            <img src="assets/jaqueta-preta.png" alt="Jaqueta preta com capuz e zíper frontal" loading="lazy">
+            <span class="view-hint">AMPLIAR / DETALHES ↗</span>
+          </div>
+          <div class="product-info">
+            <div class="product-top"><div><h3 class="product-name">Jaqueta Preta Estilo NOCTA</h3><div class="product-type">Jaquetas · Preto · Estilo NOCTA</div></div><div class="price">R$ 329,90</div></div>
+            <div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="jacket">VER PEÇA</button><button class="add-btn" data-id="jacket">ADICIONAR +</button></div>
+          </div>
+        </article>
+        <article class="product-card" data-category="calcas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da calça" data-details="pants">
+            <span class="tag">ESTILO NOCTA</span>
+            <img src="assets/calca-preta.png" alt="Calça preta estilo streetwear com bolsos e cordão" loading="lazy">
+            <span class="view-hint">AMPLIAR / DETALHES ↗</span>
+          </div>
+          <div class="product-info">
+            <div class="product-top"><div><h3 class="product-name">Calça Preta Estilo NOCTA</h3><div class="product-type">Calças · Preto · Estilo NOCTA</div></div><div class="price">R$ 279,90</div></div>
+            <div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="pants">VER PEÇA</button><button class="add-btn" data-id="pants">ADICIONAR +</button></div>
+          </div>
+        </article>
+        <article class="product-card" data-category="jaquetas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da jaqueta azul claro" data-details="jacket-blue"><span class="tag">ESTILO NOCTA</span><img src="assets/jaqueta-azul-claro.png" alt="Jaqueta azul claro com capuz e zíper" loading="lazy"><span class="view-hint">AMPLIAR / DETALHES ↗</span></div>
+          <div class="product-info"><div class="product-top"><div><h3 class="product-name">Jaqueta Azul Claro</h3><div class="product-type">Jaquetas · Azul claro · Estilo NOCTA</div></div><div class="price">R$ 329,90</div></div><div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="jacket-blue">VER PEÇA</button><button class="add-btn" data-id="jacket-blue">ADICIONAR +</button></div></div>
+        </article>
+        <article class="product-card" data-category="jaquetas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da jaqueta verde" data-details="jacket-green"><span class="tag">ESTILO NOCTA</span><img src="assets/jaqueta-verde.png" alt="Jaqueta verde com capuz e zíper" loading="lazy"><span class="view-hint">AMPLIAR / DETALHES ↗</span></div>
+          <div class="product-info"><div class="product-top"><div><h3 class="product-name">Jaqueta Verde</h3><div class="product-type">Jaquetas · Verde · Estilo NOCTA</div></div><div class="price">R$ 329,90</div></div><div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="jacket-green">VER PEÇA</button><button class="add-btn" data-id="jacket-green">ADICIONAR +</button></div></div>
+        </article>
+        <article class="product-card" data-category="jaquetas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da jaqueta cinza" data-details="jacket-gray"><span class="tag">ESTILO NOCTA</span><img src="assets/jaqueta-cinza.png" alt="Jaqueta cinza com capuz e zíper" loading="lazy"><span class="view-hint">AMPLIAR / DETALHES ↗</span></div>
+          <div class="product-info"><div class="product-top"><div><h3 class="product-name">Jaqueta Cinza</h3><div class="product-type">Jaquetas · Cinza · Estilo NOCTA</div></div><div class="price">R$ 329,90</div></div><div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="jacket-gray">VER PEÇA</button><button class="add-btn" data-id="jacket-gray">ADICIONAR +</button></div></div>
+        </article>
+        <article class="product-card" data-category="calcas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da calça azul claro" data-details="pants-blue"><span class="tag">ESTILO NOCTA</span><img src="assets/calca-azul-claro.png" alt="Calça azul claro com cós elástico e cordão" loading="lazy"><span class="view-hint">AMPLIAR / DETALHES ↗</span></div>
+          <div class="product-info"><div class="product-top"><div><h3 class="product-name">Calça Azul Claro</h3><div class="product-type">Calças · Azul claro · Estilo NOCTA</div></div><div class="price">R$ 279,90</div></div><div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="pants-blue">VER PEÇA</button><button class="add-btn" data-id="pants-blue">ADICIONAR +</button></div></div>
+        </article>
+        <article class="product-card" data-category="calcas" data-brand="nocta">
+          <div class="product-image" role="button" tabindex="0" aria-label="Ver detalhes da calça verde" data-details="pants-green"><span class="tag">ESTILO NOCTA</span><img src="assets/calca-verde.png" alt="Calça verde com cós elástico e cordão" loading="lazy"><span class="view-hint">AMPLIAR / DETALHES ↗</span></div>
+          <div class="product-info"><div class="product-top"><div><h3 class="product-name">Calça Verde</h3><div class="product-type">Calças · Verde · Estilo NOCTA</div></div><div class="price">R$ 279,90</div></div><div class="product-bottom"><span class="sizes">P · M · G · GG</span><button class="details-btn" data-details="pants-green">VER PEÇA</button><button class="add-btn" data-id="pants-green">ADICIONAR +</button></div></div>
+        </article>
+
+      </div>
+      <div id="brand-empty" style="display:none;border:1px solid #292929;background:#101010;padding:34px 22px;text-align:center;margin-top:4px">
+        <div style="font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase">Nova coleção</div>
+        <h3 id="brand-empty-title" style="font-size:21px;letter-spacing:2px;margin:12px 0">EM BREVE</h3>
+        <p style="color:#999;font-size:12px;max-width:420px;margin:0 auto 18px;line-height:1.8">Estamos preparando os produtos desta marca. Volte em breve para conferir as novidades.</p>
+        <button class="details-btn" id="show-all-brands" type="button">VER JAQUETAS NOCTA</button>
+      </div>
+      <p style="font-size:10px;color:#777;margin-top:20px">Confira preços, tamanhos e disponibilidade antes de publicar. Os valores exibidos são exemplos e o pagamento online ainda não está conectado. “Estilo NOCTA” não confirma autenticidade ou vínculo oficial com a marca.</p>
+    </section>
+
+    <section class="story" id="sobre">
+      <div class="story-art"><div class="story-mark"><b>NS.</b><span>NOIR SUPPLY · EST. 2026</span></div></div>
+      <div class="story-copy">
+        <div class="eyebrow">Mais que roupa</div>
+        <h2>FEITA PARA QUEM<br>NÃO SEGUE O PADRÃO.</h2>
+        <p>A NOIR SUPPLY nasce da cultura urbana: peças versáteis, visual marcante e atitude em cada detalhe. Uma marca para construir seu próprio caminho, sem precisar de aprovação.</p>
+        <a class="button secondary" href="#produtos">Ver produtos <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="perks" aria-label="Informações da loja">
+      <div class="perk"><span>01 /</span><b>COMPRA SIMPLES</b><p>Escolha suas peças e monte seu pedido pela sacola.</p></div>
+      <div class="perk"><span>02 /</span><b>ATENDIMENTO DIRETO</b><p>Tire dúvidas sobre medidas, estoque e disponibilidade.</p></div>
+      <div class="perk"><span>03 /</span><b>ESTILO AUTÊNTICO</b><p>Encontre peças que combinam com a sua identidade.</p></div>
+    </section>
+  </main>
+
+  <footer id="contato">
+    <div class="footer-inner">
+      <div>
+        <a class="brand" href="#inicio">NOIR <span style="color:#777">SUPPLY</span><small>USA DRIP</small></a>
+        <p>Built for the streets.<br>Seu estilo, suas regras.</p>
+      </div>
+      <div>
+        <h3>INFORMAÇÕES</h3>
+        <div class="footer-links">
+          <a href="#produtos">Produtos</a>
+          <a href="#sobre">Sobre a marca</a>
+          <a href="#" id="shipping-link">Entrega e prazos</a>
+          <a href="#" id="exchange-link">Trocas e devoluções</a>
+        </div>
+      </div>
+      <div>
+        <h3>FALE COM A GENTE</h3>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/noir_outift_supply/" target="_blank" rel="noopener noreferrer" id="instagram-link">Instagram da NOIR SUPPLY ↗</a>
+          <a href="#" id="whatsapp-link">WhatsApp — configure o número</a>
+          <a href="mailto:contato@noirsupply.com.br">contato@noirsupply.com.br</a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright"><span>© <span id="year"></span> NOIR SUPPLY. TODOS OS DIREITOS RESERVADOS.</span><span>BUILT FOR THE STREETS.</span></div>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart" id="cart" aria-label="Sacola de compras" aria-hidden="true">
+    <div class="cart-head"><h2>SUA SACOLA (<span id="cart-count-side">0</span>)</h2><button class="close-btn" id="cart-close">FECHAR ✕</button></div>
+    <div class="cart-items" id="cart-items"><p style="color:#999;font-size:12px">Sua sacola está vazia.</p></div>
+    <div class="cart-total">
+      <div class="total-row"><span>Subtotal</span><span id="cart-total">R$ 0,00</span></div>
+      <p class="cart-note">O frete não está incluído. O checkout com pagamento online ainda precisa ser conectado a um provedor de pagamento ou plataforma de loja virtual.</p>
+      <button class="button" id="checkout">CONTINUAR PARA PAGAMENTO ↗</button>
+    </div>
+  </aside>
+
+  <div class="modal-backdrop" id="product-modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">Adicionar à sacola</h2>
+      <p id="modal-description">Escolha o tamanho e a quantidade da peça.</p>
+      <label class="field"><span>TAMANHO</span><select id="size-select"><option value="">Selecione o tamanho</option><option>P</option><option>M</option><option>G</option><option>GG</option></select></label>
+      <label class="field"><span>QUANTIDADE</span><input id="quantity" type="number" min="1" max="10" value="1"></label>
+      <div class="modal-actions"><button class="button secondary" id="modal-cancel">Cancelar</button><button class="button" id="modal-add">Adicionar</button></div>
+    </div>
+  </div>
+  <div class="details-modal-backdrop" id="details-modal" aria-hidden="true">
+    <section class="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-title">
+      <button class="details-close" id="details-close" aria-label="Fechar detalhes">FECHAR ✕</button>
+      <div class="details-photo"><img id="details-image" src="assets/jaqueta-preta.png" alt="Foto ampliada do produto"></div>
+      <div class="details-copy">
+        <div class="eyebrow" id="details-eyebrow">NOIR SUPPLY · STREETWEAR</div>
+        <h2 id="details-title">Jaqueta Preta Estilo NOCTA</h2>
+        <div class="details-price" id="details-price">R$ 329,90</div>
+        <p id="details-description"></p>
+        <ul id="details-features"></ul>
+        <p><strong style="color:#eee">Tamanhos:</strong> P, M, G e GG — confirme a disponibilidade antes de comprar.</p>
+        <div class="details-actions"><button class="button secondary" id="details-back">Voltar</button><button class="button" id="details-add">ESCOLHER TAMANHO ↗</button></div>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast">Adicionado à sacola.</div>
+
+  <script>
+    // PERSONALIZE ESTES DADOS ANTES DE PUBLICAR:
+    const WHATSAPP_NUMBER = ""; // Ainda não configurado: adicione seu número com DDI + DDD, só números.
+    const INSTAGRAM_URL = "https://www.instagram.com/noir_outift_supply/";
+    const EMAIL = "contato@noirsupply.com.br";
+
+    const catalog = {
+      jacket: { name: "Jaqueta Preta Estilo NOCTA", price: 329.90, image: "assets/jaqueta-preta.png", description: "Jaqueta preta de visual urbano, com capuz, fechamento frontal por zíper e bolsos com zíper. Uma peça versátil para compor looks streetwear em dias mais frescos.", features: ["Cor preta e visual minimalista", "Capuz e zíper frontal", "Bolsos frontais com zíper", "Combine com calça preta para um conjunto"] },
+      pants: { name: "Calça Preta Estilo NOCTA", price: 279.90, image: "assets/calca-preta.png", description: "Calça preta de inspiração streetwear, com cós elástico, cordão para ajuste e detalhe de bolso com zíper. Combina com camisetas, moletons e jaquetas para um visual casual urbano.", features: ["Cor preta", "Cós elástico com cordão", "Detalhe de bolso com zíper", "Confirme composição e medidas com o fornecedor"] },
+      "jacket-blue": { name: "Jaqueta Azul Claro Estilo NOCTA", price: 329.90, image: "assets/jaqueta-azul-claro.png", description: "Jaqueta azul-clara com capuz, zíper frontal e bolsos com fechamento por zíper. Uma opção de cor suave para compor looks USA drip.", features: ["Cor azul claro", "Capuz e zíper frontal", "Bolsos frontais com zíper", "Tamanhos e composição a confirmar"] },
+      "jacket-green": { name: "Jaqueta Verde Estilo NOCTA", price: 329.90, image: "assets/jaqueta-verde.png", description: "Jaqueta verde com capuz, fechamento frontal e bolsos com zíper, para um visual de destaque.", features: ["Cor verde", "Capuz e zíper frontal", "Bolsos com zíper", "Tamanhos e composição a confirmar"] },
+      "jacket-gray": { name: "Jaqueta Cinza Estilo NOCTA", price: 329.90, image: "assets/jaqueta-cinza.png", description: "Jaqueta cinza com capuz e fechamento frontal por zíper, fácil de combinar com peças claras ou escuras.", features: ["Cor cinza", "Capuz e zíper frontal", "Bolsos frontais com zíper", "Tamanhos e composição a confirmar"] },
+      "pants-blue": { name: "Calça Azul Claro Estilo NOCTA", price: 279.90, image: "assets/calca-azul-claro.png", description: "Calça azul-clara com cós elástico, cordão ajustável e bolso com zíper, para combinar com jaquetas e camisetas.", features: ["Cor azul claro", "Cós elástico com cordão", "Bolso com zíper", "Tamanhos e composição a confirmar"] },
+      "pants-green": { name: "Calça Verde Estilo NOCTA", price: 279.90, image: "assets/calca-verde.png", description: "Calça verde com cós elástico, cordão ajustável e bolso com zíper, ideal para um look colorido e casual.", features: ["Cor verde", "Cós elástico com cordão", "Bolso com zíper", "Tamanhos e composição a confirmar"] }
+    };
+    let cart = [];
+    let selectedProduct = null;
+    const $ = (selector) => document.querySelector(selector);
+    const money = (value) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+    $("#year").textContent = new Date().getFullYear();
+
+    let activeCategory = "todos";
+    let activeBrand = "nocta";
+    const brandNames = { nocta: "Jaquetas NOCTA", nike: "Nike", "chrome-hearts": "Chrome Hearts", amiri: "Amiri", noir: "NOIR SUPPLY" };
+    function applyFilters() {
+      let visibleCount = 0;
+      document.querySelectorAll(".product-card").forEach(card => {
+        const categoryMatch = activeCategory === "todos" || card.dataset.category === activeCategory;
+        // A categoria Calças mostra as calças NOCTA sem precisar de uma aba de marca separada.
+        const brandMatch = activeCategory === "calcas" ? true : activeBrand === "nocta" ? card.dataset.brand === "nocta" && card.dataset.category === "jaquetas" : card.dataset.brand === activeBrand;
+        const visible = categoryMatch && brandMatch;
+        card.style.display = visible ? "" : "none";
+        if (visible) visibleCount++;
+      });
+      const emptyState = $("#brand-empty");
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
+      $("#brand-empty-title").textContent = (brandNames[activeBrand] || "Esta marca").toUpperCase() + " — EM BREVE";
+    }
+    $("#show-all-brands").addEventListener("click", () => {
+      activeBrand = "nocta";
+      activeCategory = "todos";
+      document.querySelectorAll(".brand-filter").forEach(item => item.classList.toggle("active", item.dataset.brand === "nocta"));
+      document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+      applyFilters();
+    });
+    document.querySelectorAll(".filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        activeCategory = button.dataset.filter;
+        document.querySelectorAll(".brand-filter").forEach(item => item.classList.toggle("active", item.dataset.brand === activeBrand));
+        applyFilters();
+      });
+    });
+    document.querySelectorAll(".brand-filter").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".brand-filter").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        activeBrand = button.dataset.brand;
+        activeCategory = "todos";
+        document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
+        applyFilters();
+      });
+    });
+
+    function openCart() {
+      $("#overlay").classList.add("open");
+      $("#cart").classList.add("open");
+      $("#cart").setAttribute("aria-hidden", "false");
+    }
+    function closeCart() {
+      $("#overlay").classList.remove("open");
+      $("#cart").classList.remove("open");
+      $("#cart").setAttribute("aria-hidden", "true");
+    }
+    $("#cart-open").addEventListener("click", openCart);
+    $("#cart-close").addEventListener("click", closeCart);
+    $("#overlay").addEventListener("click", closeCart);
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        closeCart();
+        $("#product-modal").classList.remove("open");
+        closeDetails();
+      }
+    });
+
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function openDetails(id) {
+      const product = catalog[id];
+      if (!product) return;
+      selectedProduct = id;
+      $("#details-image").src = product.image;
+      $("#details-image").alt = product.name;
+      $("#details-title").textContent = product.name;
+      $("#details-price").textContent = money(product.price);
+      $("#details-description").textContent = product.description;
+      $("#details-features").innerHTML = "";
+      product.features.forEach(feature => {
+        const li = document.createElement("li");
+        li.textContent = feature;
+        $("#details-features").appendChild(li);
+      });
+      $("#details-modal").classList.add("open");
+      $("#details-modal").setAttribute("aria-hidden", "false");
+    }
+    function closeDetails() {
+      $("#details-modal").classList.remove("open");
+      $("#details-modal").setAttribute("aria-hidden", "true");
+    }
+    document.querySelectorAll("[data-details]").forEach(element => {
+      element.addEventListener("click", event => {
+        if (event.target.closest("button.add-btn")) return;
+        openDetails(element.dataset.details);
+      });
+      if (element.classList.contains("product-image")) {
+        element.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openDetails(element.dataset.details); }
+        });
+      }
+    });
+    $("#details-close").addEventListener("click", closeDetails);
+    $("#details-back").addEventListener("click", closeDetails);
+    $("#details-modal").addEventListener("click", event => { if (event.target.id === "details-modal") closeDetails(); });
+    $("#details-add").addEventListener("click", () => {
+      closeDetails();
+      $("#size-select").value = "";
+      $("#quantity").value = 1;
+      $("#product-modal").classList.add("open");
+    });
+
+    document.querySelectorAll(".add-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedProduct = button.dataset.id;
+        $("#size-select").value = "";
+        $("#quantity").value = 1;
+        $("#product-modal").classList.add("open");
+      });
+    });
+    $("#modal-cancel").addEventListener("click", () => $("#product-modal").classList.remove("open"));
+    $("#product-modal").addEventListener("click", e => {
+      if (e.target.id === "product-modal") $("#product-modal").classList.remove("open");
+    });
+    $("#modal-add").addEventListener("click", () => {
+      const size = $("#size-select").value;
+      const quantity = Math.max(1, Math.min(10, parseInt($("#quantity").value, 10) || 1));
+      if (!size) { showToast("Selecione um tamanho."); return; }
+      const product = catalog[selectedProduct];
+      const existing = cart.find(item => item.id === selectedProduct && item.size === size);
+      if (existing) existing.quantity += quantity;
+      else cart.push({ id: selectedProduct, name: product.name, price: product.price, size, quantity });
+      $("#product-modal").classList.remove("open");
+      renderCart();
+      showToast("Produto adicionado à sacola.");
+      openCart();
+    });
+
+    function renderCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      $("#cart-count").textContent = count;
+      $("#cart-count-side").textContent = count;
+      $("#cart-items").innerHTML = "";
+      if (!cart.length) {
+        $("#cart-items").innerHTML = '<p style="color:#999;font-size:12px">Sua sacola está vazia.</p>';
+      } else {
+        cart.forEach((item, index) => {
+          const row = document.createElement("div");
+          row.className = "cart-item";
+          const info = document.createElement("div");
+          info.textContent = item.name;
+          const detail = document.createElement("small");
+          detail.textContent = `Tamanho ${item.size} · Qtd. ${item.quantity}`;
+          info.appendChild(detail);
+          const remove = document.createElement("button");
+          remove.textContent = "REMOVER";
+          remove.addEventListener("click", () => { cart.splice(index, 1); renderCart(); });
+          const price = document.createElement("div");
+          price.textContent = money(item.price * item.quantity);
+          const actions = document.createElement("div");
+          actions.appendChild(remove);
+          row.append(info, price);
+          $("#cart-items").appendChild(row);
+          $("#cart-items").appendChild(actions);
+        });
+      }
+      $("#cart-total").textContent = money(cart.reduce((sum, item) => sum + item.price * item.quantity, 0));
+    }
+
+    $("#checkout").addEventListener("click", () => {
+      if (!cart.length) { showToast("Adicione um produto primeiro."); return; }
+      if (!WHATSAPP_NUMBER) {
+        showToast("Checkout online ainda não configurado. Conecte um provedor de pagamento antes de vender.");
+        return;
+      }
+      const lines = cart.map(item => `• ${item.name} | Tam. ${item.size} | Qtd. ${item.quantity} | ${money(item.price * item.quantity)}`);
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const message = `Olá! Quero fazer um pedido na NOIR SUPPLY:\n\n${lines.join("\n")}\n\nSubtotal: ${money(total)}\nGostaria de confirmar frete e disponibilidade.`;
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    });
+
+    $("#instagram-link").addEventListener("click", e => {
+      if (!INSTAGRAM_URL) { e.preventDefault(); showToast("Configure o link do Instagram no código."); }
+      else { e.preventDefault(); window.open(INSTAGRAM_URL, "_blank", "noopener,noreferrer"); }
+    });
+    $("#whatsapp-link").addEventListener("click", e => {
+      e.preventDefault();
+      if (!WHATSAPP_NUMBER) { showToast("Configure o número do WhatsApp no código."); return; }
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}`, "_blank", "noopener,noreferrer");
+    });
+    $("#shipping-link").addEventListener("click", e => {
+      e.preventDefault();
+      alert("Adicione aqui sua política real de envio, prazos e cálculo de frete antes de publicar.");
+    });
+    $("#exchange-link").addEventListener("click", e => {
+      e.preventDefault();
+      alert("Adicione aqui sua política de trocas e devoluções antes de publicar.");
+    });
+  </script>
+</body>
+</html>
